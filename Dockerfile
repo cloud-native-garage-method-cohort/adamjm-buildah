@@ -1,7 +1,13 @@
-FROM quay.io/ibmgaragecloud/node
+FROM quay.io/ibmgaragecloud/node:lts-stretch
 
 WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm ci
+
 COPY . .
-RUN npm install
-EXPOSE 8080
-CMD ["node", "server.js"]
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
